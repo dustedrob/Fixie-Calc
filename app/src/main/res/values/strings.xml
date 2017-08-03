@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Track Assistant</string>
+    <string name="chainring">Chainring</string>
+    <string name="cog">Cog</string>
+    <string name="pick_chainring">Pick a chainring</string>
+    <string name="pick_cog">Pick a cog</string>
+    <string name="metric">Metric</string>
+    <string name="imperial">Imperial</string>
+
+</resources>
