@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <array name="wheel_values">
+        <item>700x18c</item>
+        <item>700x19c</item>
+        <item>700x20c</item>
+        <item>700x23c</item>
+        <item>700x25c</item>
+        <item>700x28c</item>
+        <item>700x30c</item>
+        <item>700x32c</item>
+        <item>700x35c</item>
+
+    </array>
+</resources>

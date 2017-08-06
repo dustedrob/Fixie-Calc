@@ -2,93 +2,101 @@ package me.roberto.trackassistant
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.util.Log
+import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import kotlinx.android.synthetic.main.activity_main.*
 import me.roberto.OnEditableSeekBarChangeListener
 
-class MainActivity : AppCompatActivity(){
-
+class MainActivity : AppCompatActivity(),AdapterView.OnItemSelectedListener{
 
     val PREFS="me.roberto.track.prefs"
     val TAG="MAIN"
-
     private val  PREFS_SYSTEM="me.roberto.tracks.prefs.system"
+    var wheelSizes= intArrayOf(2070,2080,2086,2096,2105,2136,2146,2155,2168)
 
-    private val METRIC =0
-    private val IMPERIAL =1
-    var gear:Double=0.0
+
+    fun calculateGear(wheelSize: Int, ring: Int, cog:Int,type:System):Double
+    {
+        val wheelSize:Double = wheelSize*0.001
+        val development = ring.toFloat () / cog.toFloat()
+
+        when(type){
+            System.METRIC->return development*wheelSize
+            System.IMPERIAL->return development*(wheelSize*39.37)
+        }
+    }
+
+    fun updateUI(selectedWheelSize:Int, selectedRing:Int, selectedCog:Int)
+    {
+
+        val prefs=this.getSharedPreferences(PREFS,0)
+        var system: System? =null
+
+        if (radioGroup.checkedRadioButtonId==metricRadio.id)
+        {
+            prefs.edit().putInt(PREFS_SYSTEM, System.METRIC.ordinal).commit()
+            unitText.text="m"
+            system=System.METRIC
+        }
+        else
+        {
+            prefs.edit().putInt(PREFS_SYSTEM, System.IMPERIAL.ordinal).commit()
+            unitText.text="in"
+            system=System.IMPERIAL
+
+        }
+        rollout.text="%.2f".format(calculateGear(selectedWheelSize,selectedRing,selectedCog,system))
+
+
+    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
         val prefs=this.getSharedPreferences(PREFS,0)
 
-        radioGroup . setOnCheckedChangeListener { group, checkedId ->
-            when (checkedId) {
-                metricRadio.id ->{prefs.edit().putInt(PREFS_SYSTEM, METRIC).commit()
-                gear=calculateMeters()
-                    rollout.text="%.2f".format(gear)
-                    unitText.text="m"}
-
-                imperialRadio.id -> {
-                    prefs.edit().putInt(PREFS_SYSTEM, IMPERIAL).commit()
-                gear=calculateInches()
-                    rollout.text="%.2f".format(gear)
-                    unitText.text="in"
-                }
-            }
-        }
+        val wheelAdapter=ArrayAdapter.createFromResource(this,R.array.wheel_values,android.R.layout.simple_spinner_dropdown_item)
+        wheel_spinner.adapter=wheelAdapter
+        wheel_spinner.onItemSelectedListener=this
 
 
-        when (prefs.getInt(PREFS_SYSTEM, METRIC))
+        when (prefs.getInt(PREFS_SYSTEM, System.METRIC.ordinal))
         {
-            METRIC->radioGroup.check(R.id.metricRadio)
-            IMPERIAL->radioGroup.check(R.id.imperialRadio)
+            System.METRIC.ordinal->radioGroup.check(R.id.metricRadio)
+            System.IMPERIAL.ordinal->radioGroup.check(R.id.imperialRadio)
         }
 
+        radioGroup . setOnCheckedChangeListener { radioGroup, i ->
+            updateUI(wheelSizes[wheel_spinner.selectedItemPosition],ring_bar.value,cog_bar.value)
+        }
 
         ring_bar.setOnEditableSeekBarChangeListener(gearListener)
         cog_bar.setOnEditableSeekBarChangeListener(gearListener)
 
     }
 
-
-    fun calculateMeters():Double
-    {
-        val development=ring_bar.value.toFloat()/cog_bar.value
-        return development*2.1
-    }
-
-    fun calculateInches():Double
-    {
-        val development=ring_bar.value.toFloat()/cog_bar.value
-        return development*26.3
-
-    }
-
-
     var gearListener:OnEditableSeekBarChangeListener =object: OnEditableSeekBarChangeListener()
     {
 
         override fun onEditableSeekBarValueChanged(id: Int, value: Int) {
             super.onEditableSeekBarValueChanged(id, value)
-
-
-            if (radioGroup.checkedRadioButtonId==metricRadio.id)
-            {
-                unitText.text="m"
-                gear= calculateMeters()
-
-            }
-            else
-            {
-
-                unitText.text="in"
-                gear=calculateInches()
-            }
-            rollout.text="%.2f".format(gear)
-
-
+            updateUI(wheelSizes[wheel_spinner.selectedItemPosition],ring_bar.value,cog_bar.value)
         }
+
+    }
+
+
+    override fun onNothingSelected(p0: AdapterView<*>?) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+        Log.i(TAG, "selected : "+p3)
+        updateUI(wheelSizes[wheel_spinner.selectedItemPosition],ring_bar.value,cog_bar.value)
 
     }
 
