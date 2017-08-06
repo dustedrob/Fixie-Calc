@@ -1,4 +1,4 @@
-package me.roberto.trackassistant
+package me.roberto.fixiecalc
 
 import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4
@@ -19,6 +19,6 @@ class ExampleInstrumentedTest {
     fun useAppContext() {
         // Context of the app under testListener.
         val appContext = InstrumentationRegistry.getTargetContext()
-        assertEquals("me.roberto.trackassistant", appContext.packageName)
+        assertEquals("me.roberto.fixiecalc", appContext.packageName)
     }
 }

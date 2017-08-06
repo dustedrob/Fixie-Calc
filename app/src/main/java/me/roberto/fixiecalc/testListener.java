@@ -1,4 +1,4 @@
-package me.roberto.trackassistant;
+package me.roberto.fixiecalc;
 
 import me.roberto.OnEditableSeekBarChangeListener;
 

@@ -1,9 +1,8 @@
-package me.roberto.trackassistant
+package me.roberto.fixiecalc
 
 import org.junit.Test
 
 import org.junit.Assert.*
-import org.junit.Before
 
 /**
  * Created by roberto on 6/08/17.

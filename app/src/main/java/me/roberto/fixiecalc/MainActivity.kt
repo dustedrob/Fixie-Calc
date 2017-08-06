@@ -1,4 +1,4 @@
-package me.roberto.trackassistant
+package me.roberto.fixiecalc
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
