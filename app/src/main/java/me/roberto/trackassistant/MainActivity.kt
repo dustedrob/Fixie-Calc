@@ -36,17 +36,17 @@ class MainActivity : AppCompatActivity(),AdapterView.OnItemSelectedListener{
 
         if (radioGroup.checkedRadioButtonId==metricRadio.id)
         {
-            prefs.edit().putInt(PREFS_SYSTEM, System.METRIC.ordinal).commit()
             unitText.text="m"
             system=System.METRIC
         }
         else
         {
-            prefs.edit().putInt(PREFS_SYSTEM, System.IMPERIAL.ordinal).commit()
             unitText.text="in"
             system=System.IMPERIAL
 
         }
+        prefs.edit().putInt(PREFS_SYSTEM, system.ordinal).commit()
+
         rollout.text="%.2f".format(calculateGear(selectedWheelSize,selectedRing,selectedCog,system))
 
 
