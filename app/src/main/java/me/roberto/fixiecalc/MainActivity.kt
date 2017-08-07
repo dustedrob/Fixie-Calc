@@ -19,12 +19,17 @@ class MainActivity : AppCompatActivity(),AdapterView.OnItemSelectedListener{
 
     fun calculateGear(wheelSize: Int, ring: Int, cog:Int,type:System):Double
     {
-        val wheelSize:Double = wheelSize*0.001
+
+
         val development = ring.toFloat () / cog.toFloat()
 
+
         when(type){
-            System.METRIC->return development*wheelSize
-            System.IMPERIAL->return development*(wheelSize*39.37)
+            //convert the circumference in mm to meters
+            System.METRIC->return development*(wheelSize*0.001)
+
+            //first get the diameter of the circumference and then convert it to inches
+            System.IMPERIAL->return development*(wheelSize/3.1416/25.4)
         }
     }
 
