@@ -14,7 +14,7 @@ class MainActivityTest {
     @Test
     fun calculateGear() {
 
-        val gear = MainActivity().calculateGear(2096, 50, 15, System.METRIC)
+        val gear = MainActivity().calculateGear(2096, 50, 15, Measure.METERS)
         assertEquals(6.99,gear,0.1)
     }
 

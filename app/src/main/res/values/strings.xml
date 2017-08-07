@@ -4,8 +4,8 @@
     <string name="cog">Cog</string>
     <string name="pick_chainring">Chainring</string>
     <string name="pick_cog">Cog</string>
-    <string name="metric">Metric</string>
-    <string name="imperial">Imperial</string>
+    <string name="meters">Meters</string>
+    <string name="inches">Inches</string>
     <string name="wheel_size">Wheel size</string>
 
 </resources>

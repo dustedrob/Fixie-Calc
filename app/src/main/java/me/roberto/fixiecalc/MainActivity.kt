@@ -17,7 +17,7 @@ class MainActivity : AppCompatActivity(),AdapterView.OnItemSelectedListener{
     var wheelSizes= intArrayOf(2070,2080,2086,2096,2105,2136,2146,2155,2168)
 
 
-    fun calculateGear(wheelSize: Int, ring: Int, cog:Int,type:System):Double
+    fun calculateGear(wheelSize: Int, ring: Int, cog:Int,type: Measure):Double
     {
 
 
@@ -26,10 +26,10 @@ class MainActivity : AppCompatActivity(),AdapterView.OnItemSelectedListener{
 
         when(type){
             //convert the circumference in mm to meters
-            System.METRIC->return development*(wheelSize*0.001)
+            Measure.METERS ->return development*(wheelSize*0.001)
 
             //first get the diameter of the circumference and then convert it to inches
-            System.IMPERIAL->return development*(wheelSize/3.1416/25.4)
+            Measure.INCHES ->return development*(wheelSize/3.1416/25.4)
         }
     }
 
@@ -37,22 +37,22 @@ class MainActivity : AppCompatActivity(),AdapterView.OnItemSelectedListener{
     {
 
         val prefs=this.getSharedPreferences(PREFS,0)
-        var system: System? =null
+        var measure: Measure? =null
 
-        if (radioGroup.checkedRadioButtonId==metricRadio.id)
+        if (radioGroup.checkedRadioButtonId== metersRadio.id)
         {
             unitText.text="m"
-            system=System.METRIC
+            measure = Measure.METERS
         }
         else
         {
             unitText.text="in"
-            system=System.IMPERIAL
+            measure = Measure.INCHES
 
         }
-        prefs.edit().putInt(PREFS_SYSTEM, system.ordinal).commit()
+        prefs.edit().putInt(PREFS_SYSTEM, measure.ordinal).commit()
 
-        rollout.text="%.2f".format(calculateGear(selectedWheelSize,selectedRing,selectedCog,system))
+        rollout.text="%.2f".format(calculateGear(selectedWheelSize,selectedRing,selectedCog, measure))
 
 
     }
@@ -69,10 +69,10 @@ class MainActivity : AppCompatActivity(),AdapterView.OnItemSelectedListener{
         wheel_spinner.onItemSelectedListener=this
 
 
-        when (prefs.getInt(PREFS_SYSTEM, System.METRIC.ordinal))
+        when (prefs.getInt(PREFS_SYSTEM, Measure.METERS.ordinal))
         {
-            System.METRIC.ordinal->radioGroup.check(R.id.metricRadio)
-            System.IMPERIAL.ordinal->radioGroup.check(R.id.imperialRadio)
+            Measure.METERS.ordinal->radioGroup.check(R.id.metersRadio)
+            Measure.INCHES.ordinal->radioGroup.check(R.id.inchesRadio)
         }
 
         radioGroup . setOnCheckedChangeListener { radioGroup, i ->

@@ -120,21 +120,21 @@
                 android:layout_marginTop="8dp">
 
             <RadioButton
-                android:id="@+id/metricRadio"
+                android:id="@+id/metersRadio"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/metric"
+                android:text="@string/meters"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 android:layout_marginTop="8dp" />
 
             <RadioButton
-                android:id="@+id/imperialRadio"
+                android:id="@+id/inchesRadio"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/imperial"
+                android:text="@string/inches"
                 android:layout_marginStart="8dp"
-                app:layout_constraintStart_toEndOf="@+id/metricRadio"
+                app:layout_constraintStart_toEndOf="@+id/metersRadio"
                 app:layout_constraintTop_toTopOf="parent"
                 android:layout_marginTop="8dp" />
             </RadioGroup>
