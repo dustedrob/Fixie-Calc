@@ -1,6 +1,7 @@
 package me.roberto.kitso.database
 
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy.REPLACE
 import androidx.room.Query
@@ -14,6 +15,11 @@ interface GearDao {
 
     @Insert(onConflict = REPLACE)
     fun save(item: Gear)
+
+
+    @Delete
+    fun delete(item: Gear)
+
 
     @Query("SELECT * FROM gear")
     fun load(): Single<List<Gear>>

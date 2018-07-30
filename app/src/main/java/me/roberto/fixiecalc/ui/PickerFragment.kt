@@ -12,12 +12,18 @@ import android.view.animation.BounceInterpolator
 import android.view.animation.ScaleAnimation
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.CompoundButton
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import kotlinx.android.synthetic.main.fragment_picker.*
 import kotlinx.android.synthetic.main.gear_picker.*
 import me.roberto.OnEditableSeekBarChangeListener
 import me.roberto.fixiecalc.Measure
 import me.roberto.fixiecalc.R
+import me.roberto.kitso.database.Injection
+import me.roberto.kitso.ui.GearViewModel
+import me.roberto.kitso.ui.ViewModelFactory
 
 
 class PickerFragment : Fragment(), AdapterView.OnItemSelectedListener {
@@ -31,6 +37,8 @@ class PickerFragment : Fragment(), AdapterView.OnItemSelectedListener {
     var chainRing=44
     var wheelSize=0
     var wheelSizes= intArrayOf(2070,2080,2086,2096,2105,2136,2146,2155,2168)
+
+    val favoriteGears:HashSet<Gear> = HashSet()
     lateinit var gearListener: OnEditableSeekBarChangeListener
 
 
@@ -59,15 +67,29 @@ class PickerFragment : Fragment(), AdapterView.OnItemSelectedListener {
     }
 
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    private lateinit var viewModelFactory: ViewModelFactory
+
+    private lateinit var viewModel: GearViewModel
+
+    private val observer: Observer<List<Gear>> = Observer { list->
+
+        favoriteGears.clear()
+        favoriteGears.addAll(list)
+
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        viewModelFactory= Injection.provideViewModelFactory(activity!!)
+        viewModel = ViewModelProviders.of(this,viewModelFactory).get(GearViewModel::class.java)
+        viewModel.gears.observe(this,observer)
+    }
 
 
-
-        button_favorite.setOnCheckedChangeListener { compoundButton, checked ->
-
-
-
+    fun changeFavoriteState(button: CompoundButton, checked:Boolean)
+    {
+        if (checked)
+        {
 
 
             if (checked)
@@ -79,8 +101,19 @@ class PickerFragment : Fragment(), AdapterView.OnItemSelectedListener {
                 favorite_text.setTypeface(null,Typeface.NORMAL)
             }
 
-            compoundButton.startAnimation(getAnimation())
+            button.startAnimation(getAnimation())
+
+
         }
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+
+
+        button_favorite.setOnCheckedChangeListener { compoundButton, checked ->
+            changeFavoriteState(compoundButton,checked) }
         val prefs=activity?.getSharedPreferences(PREFS,0)
 
         val wheelAdapter= ArrayAdapter.createFromResource(activity, R.array.wheel_values,android.R.layout.simple_spinner_dropdown_item)
@@ -200,7 +233,10 @@ class PickerFragment : Fragment(), AdapterView.OnItemSelectedListener {
         unitText.startAnimation(getAnimation())
         rollout.text="%.2f".format(calculateGear(selectedWheelSize,selectedRing,selectedCog, measure))
 
+        val gear =Gear(selectedRing,selectedCog,selectedWheelSize)
 
+
+            changeFavoriteState(button_favorite,favoriteGears.contains(gear))
     }
 
 
