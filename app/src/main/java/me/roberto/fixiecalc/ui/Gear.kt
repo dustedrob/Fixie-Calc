@@ -1,4 +1,9 @@
 package me.roberto.fixiecalc.ui
 
-class Gear(var chainRing:Int, var cog:Int,wheelSize:Int ) {
-}
+import androidx.annotation.Keep
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Keep
+@Entity
+class Gear(@PrimaryKey var id:String, var chainRing:Int, var cog:Int, wheelSize:Int )
