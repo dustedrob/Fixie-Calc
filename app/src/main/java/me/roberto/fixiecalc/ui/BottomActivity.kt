@@ -16,6 +16,12 @@ class BottomActivity : AppCompatActivity(), OnFragmentInteractionListener {
     override fun onFragmentInteraction() {
     }
 
+
+
+    companion object {
+        val PREFS="me.roberto.track.prefs"
+        val  PREFS_SYSTEM="me.roberto.tracks.prefs.system"
+    }
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
 
 

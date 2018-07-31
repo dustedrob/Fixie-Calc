@@ -19,8 +19,12 @@ import androidx.lifecycle.ViewModelProviders
 import kotlinx.android.synthetic.main.fragment_picker.*
 import kotlinx.android.synthetic.main.gear_picker.*
 import me.roberto.OnEditableSeekBarChangeListener
+import me.roberto.fixiecalc.Calculations.Calculations.Companion.calculateGear
+import me.roberto.fixiecalc.Calculations.Calculations.Companion.wheelSizes
 import me.roberto.fixiecalc.Measure
 import me.roberto.fixiecalc.R
+import me.roberto.fixiecalc.ui.BottomActivity.Companion.PREFS
+import me.roberto.fixiecalc.ui.BottomActivity.Companion.PREFS_SYSTEM
 import me.roberto.kitso.database.Injection
 import me.roberto.kitso.ui.GearViewModel
 import me.roberto.kitso.ui.ViewModelFactory
@@ -31,12 +35,9 @@ class PickerFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
 
     val TAG="gear_picker"
-    val PREFS="me.roberto.track.prefs"
-    private val  PREFS_SYSTEM="me.roberto.tracks.prefs.system"
     var cog=11
     var chainRing=44
     var wheelSize=0
-    var wheelSizes= intArrayOf(2070,2080,2086,2096,2105,2136,2146,2155,2168)
 
     val favoriteGears:HashSet<Gear> = HashSet()
     lateinit var gearListener: OnEditableSeekBarChangeListener
@@ -186,21 +187,7 @@ class PickerFragment : Fragment(), AdapterView.OnItemSelectedListener {
                 PickerFragment().apply {}
     }
 
-    fun calculateGear(wheelSize: Int, ring: Int, cog:Int,type: Measure):Double
-    {
 
-
-        val development = ring.toFloat () / cog.toFloat()
-
-
-        return when(type){
-        //convert the circumference in mm to meters
-            Measure.METERS -> development*(wheelSize*0.001)
-
-        //first get the diameter of the circumference and then convert it to inches
-            Measure.INCHES -> development*(wheelSize/3.1416/25.4)
-        }
-    }
 
 
 
