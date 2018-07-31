@@ -66,7 +66,7 @@ class PickerFragment : Fragment(), AdapterView.OnItemSelectedListener {
         super.onCreate(savedInstanceState)
 
         viewModelFactory= Injection.provideViewModelFactory(activity!!)
-        viewModel = ViewModelProviders.of(this,viewModelFactory).get(GearViewModel::class.java)
+        viewModel = ViewModelProviders.of(activity!!,viewModelFactory).get(GearViewModel::class.java)
         viewModel.gears.observe(this,observer)
         viewModel.loadFavoriteGears()
     }

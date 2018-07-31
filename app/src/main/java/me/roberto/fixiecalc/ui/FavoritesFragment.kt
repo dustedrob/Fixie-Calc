@@ -31,7 +31,7 @@ class FavoritesFragment : Fragment() {
 
 
         viewModelFactory= Injection.provideViewModelFactory(activity!!)
-        viewModel = ViewModelProviders.of(this,viewModelFactory).get(GearViewModel::class.java)
+        viewModel = ViewModelProviders.of(activity!!,viewModelFactory).get(GearViewModel::class.java)
         viewModel.gears.observe(this,observer)
     }
 
@@ -68,7 +68,6 @@ class FavoritesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        gearAdapter.addAll(viewModel.gears.value!!)
     }
 
 
