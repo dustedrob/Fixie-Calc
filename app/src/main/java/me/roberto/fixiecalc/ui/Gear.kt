@@ -10,11 +10,11 @@ class Gear(chainRing:Int, cog:Int, wheelSize:Int ) {
 
 
     @PrimaryKey
-    val id="$chainRing$cog$wheelSize"
+    var id="$chainRing$cog$wheelSize"
 
-    val chainRing=chainRing
-    val cog=cog
-    val wheelSize=wheelSize
+    var chainRing=chainRing
+    var cog=cog
+    var wheelSize=wheelSize
 
 
 

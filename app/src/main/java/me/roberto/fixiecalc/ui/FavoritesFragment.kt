@@ -8,9 +8,13 @@ import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import me.roberto.fixiecalc.R
 
-import me.roberto.fixiecalc.dummy.DummyContent
+import me.roberto.kitso.database.Injection
+import me.roberto.kitso.ui.GearViewModel
+import me.roberto.kitso.ui.ViewModelFactory
 
 /**
  * A fragment representing a list of Items.
@@ -21,39 +25,50 @@ class FavoritesFragment : Fragment() {
 
     // TODO: Customize parameters
 
-    private var listener: OnFragmentInteractionListener? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+
+        viewModelFactory= Injection.provideViewModelFactory(activity!!)
+        viewModel = ViewModelProviders.of(this,viewModelFactory).get(GearViewModel::class.java)
+        viewModel.gears.observe(this,observer)
     }
+
+
+    private lateinit var viewModelFactory: ViewModelFactory
+    private lateinit var viewModel: GearViewModel
+    private val observer: Observer<List<Gear>> = Observer { list->
+
+        gearAdapter.gears.clear()
+        gearAdapter.addAll(list)
+
+        }
+
+    private lateinit var gearAdapter:GearRecyclerViewAdapter
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_gear_list, container, false)
 
-        // Set the adapter
+
+        gearAdapter= GearRecyclerViewAdapter()
+        // Set the gearAdapter
         if (view is RecyclerView) {
             with(view) {
                 layoutManager = LinearLayoutManager(context)
-                adapter = MyGearRecyclerViewAdapter(DummyContent.ITEMS, listener)
+
+                adapter = gearAdapter
             }
         }
         return view
     }
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        if (context is OnFragmentInteractionListener) {
-            listener = context
-        } else {
-            throw RuntimeException(context.toString() + " must implement OnListFragmentInteractionListener")
-        }
-    }
 
-    override fun onDetach() {
-        super.onDetach()
-        listener = null
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        gearAdapter.addAll(viewModel.gears.value!!)
     }
 
 

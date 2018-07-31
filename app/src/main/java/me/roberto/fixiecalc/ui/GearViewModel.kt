@@ -1,7 +1,9 @@
 package me.roberto.kitso.ui
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import io.reactivex.Completable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import me.roberto.fixiecalc.ui.Gear
@@ -18,8 +20,12 @@ class GearViewModel(private val dataSource: GearDao) : ViewModel() {
     fun loadFavoriteGears() {
 
 
-        dataSource.load().subscribeOn(Schedulers.newThread()).doOnSuccess { list-> gears.value=list }
-                .observeOn(AndroidSchedulers.mainThread()).subscribe()
+        dataSource.load().subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe{
+                    list-> gears.value=list
+                    Log.i(TAG, "getting new gears: ")
+                }
     }
 
 
@@ -27,12 +33,17 @@ class GearViewModel(private val dataSource: GearDao) : ViewModel() {
 
     fun deleteFavoriteGear(gear:Gear)
     {
-        dataSource.delete(gear)
+        Completable.fromAction{dataSource.delete(gear)}
+                .subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread())
+                .subscribe{loadFavoriteGears()}
     }
 
     fun insertFavoriteGear(gear:Gear)
     {
-        dataSource.save(gear)
+
+        Completable.fromAction{dataSource.save(gear)}
+        .subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread())
+                .subscribe{loadFavoriteGears()}
     }
 
 }

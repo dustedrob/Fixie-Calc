@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import me.roberto.fixiecalc.ui.Gear
 
-@Database(entities = [(Gear::class)],version = 1)
+@Database(entities = [(Gear::class)],version = 1,exportSchema = false)
 abstract class GearDatabase: RoomDatabase() {
 
     abstract fun GearDatabase_Impl():GearDao

@@ -37,11 +37,6 @@ class BottomActivity : AppCompatActivity(), OnFragmentInteractionListener {
         false
     }
 
-    private lateinit var viewModelFactory: ViewModelFactory
-
-    private lateinit var viewModel: GearViewModel
-
-    private lateinit var bookObserver: Observer<List<Gear>>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,9 +47,7 @@ class BottomActivity : AppCompatActivity(), OnFragmentInteractionListener {
         supportActionBar?.title=getString(R.string.calculator)
         switchFragment(PickerFragment.newInstance(),"picker")
 
-        viewModelFactory= Injection.provideViewModelFactory(this)
-        viewModel = ViewModelProviders.of(this,viewModelFactory).get(GearViewModel::class.java)
-        viewModel.loadFavoriteGears()
+
 
     }
 

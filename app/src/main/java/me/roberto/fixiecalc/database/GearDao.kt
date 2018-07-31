@@ -5,6 +5,8 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy.REPLACE
 import androidx.room.Query
+import io.reactivex.Completable
+import io.reactivex.Maybe
 import io.reactivex.Single
 import me.roberto.fixiecalc.ui.Gear
 
@@ -22,7 +24,7 @@ interface GearDao {
 
 
     @Query("SELECT * FROM gear")
-    fun load(): Single<List<Gear>>
+    fun load():Maybe<List<Gear>>
 
 
 
