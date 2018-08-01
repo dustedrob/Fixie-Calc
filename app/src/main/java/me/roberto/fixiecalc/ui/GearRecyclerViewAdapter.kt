@@ -2,7 +2,6 @@ package me.roberto.fixiecalc.ui
 
 import android.content.Context
 import android.content.SharedPreferences
-import android.view.ContextMenu
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -10,10 +9,9 @@ import android.view.ViewGroup
 import android.widget.TextView
 
 
-import me.roberto.fixiecalc.dummy.DummyContent.DummyItem
 
 import kotlinx.android.synthetic.main.fragment_gear.view.*
-import me.roberto.fixiecalc.Calculations.Calculations
+import me.roberto.fixiecalc.calculations.Calculations
 import me.roberto.fixiecalc.Measure
 import me.roberto.fixiecalc.R
 import me.roberto.fixiecalc.ui.BottomActivity.Companion.PREFS_SYSTEM
@@ -53,11 +51,29 @@ class GearRecyclerViewAdapter
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = gears[position]
+        var unit:String
+
+        when (measure)
+        {
+            Measure.METERS->unit="m"
+            Measure.INCHES->unit="in"
+        }
+
+
 
         holder.chainRing.text = item.chainRing.toString()
         holder.cog.text = item.cog.toString()
-        holder.wheelSize.text = item.wheelSize.toString()
-        holder.rollout.text = "%.2f".format(Calculations.calculateGear(item.wheelSize, item.chainRing, item.cog,measure  ))
+
+
+        for (i in Calculations.wheelSizes.indices)
+        {
+            if (Calculations.wheelSizes[i]==item.wheelSize)
+            holder.wheelSize.text= context.resources.getStringArray(R.array.wheel_values)[i].toString()
+        }
+
+        holder.rollout.text = "%.2f".format(Calculations.calculateGear(item.wheelSize, item.chainRing, item.cog,measure  ))+" "+unit
+
+
     }
 
 

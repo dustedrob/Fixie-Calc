@@ -1,9 +1,11 @@
 package me.roberto.fixiecalc.ui
 
 import android.os.Bundle
+import android.transition.Transition
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import kotlinx.android.synthetic.main.activity_bottom.*
@@ -64,6 +66,7 @@ class BottomActivity : AppCompatActivity(), OnFragmentInteractionListener {
         supportFragmentManager
                 .beginTransaction()
                 .replace(R.id.fragment_container, fragment,tag)
+                .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
                 .commit()
 
         return true

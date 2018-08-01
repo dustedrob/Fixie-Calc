@@ -1,6 +1,5 @@
 package me.roberto.fixiecalc.ui
 
-import me.roberto.fixiecalc.dummy.DummyContent
 
 
 /**

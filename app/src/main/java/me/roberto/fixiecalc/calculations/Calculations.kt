@@ -1,4 +1,4 @@
-package me.roberto.fixiecalc.Calculations
+package me.roberto.fixiecalc.calculations
 
 import me.roberto.fixiecalc.Measure
 

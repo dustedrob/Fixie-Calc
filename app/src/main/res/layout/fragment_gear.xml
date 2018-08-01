@@ -1,42 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="horizontal">
+    android:id="@+id/linearLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
     <TextView
-        tools:text="56"
+        android:textAppearance="?attr/textAppearanceListItem"
         android:id="@+id/gear_chainring"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/text_margin"
-        android:textAppearance="?attr/textAppearanceListItem" />
+        android:layout_marginStart="8dp"
+
+        android:textSize="24sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/cross"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:text="56" />
+
 
     <TextView
-        tools:text="15
-"
+        android:textAppearance="?attr/textAppearanceListItem"
+        android:id="@+id/cross"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="x"
+        android:textSize="24sp"
+        app:layout_constraintStart_toEndOf="@+id/gear_chainring"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:textAppearance="?attr/textAppearanceListItem"
         android:id="@+id/gear_cog"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/text_margin"
-        android:textAppearance="?attr/textAppearanceListItem" />
+
+        android:textSize="24sp"
+        app:layout_constraintStart_toEndOf="@+id/cross"
+        tools:text="15
+" />
+
     <TextView
-        tools:text="700x23c"
+
         android:id="@+id/gear_wheel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/text_margin"
-        android:textAppearance="?attr/textAppearanceListItem" />
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="8dp"
+
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cross"
+        tools:text="700x23c" />
 
     <TextView
-        android:textStyle="bold"
-        tools:text="8.98m"
+
+        android:textAppearance="?attr/textAppearanceListItem"
         android:id="@+id/gear_rollout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/text_margin"
-        android:textAppearance="?attr/textAppearanceListItem" />
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="8.98m" />
 
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

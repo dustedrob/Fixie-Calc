@@ -19,8 +19,8 @@ import androidx.lifecycle.ViewModelProviders
 import kotlinx.android.synthetic.main.fragment_picker.*
 import kotlinx.android.synthetic.main.gear_picker.*
 import me.roberto.OnEditableSeekBarChangeListener
-import me.roberto.fixiecalc.Calculations.Calculations.Companion.calculateGear
-import me.roberto.fixiecalc.Calculations.Calculations.Companion.wheelSizes
+import me.roberto.fixiecalc.calculations.Calculations.Companion.calculateGear
+import me.roberto.fixiecalc.calculations.Calculations.Companion.wheelSizes
 import me.roberto.fixiecalc.Measure
 import me.roberto.fixiecalc.R
 import me.roberto.fixiecalc.ui.BottomActivity.Companion.PREFS
