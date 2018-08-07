@@ -13,8 +13,8 @@ android {
         applicationId "me.roberto.fixiecalc"
         minSdkVersion 21
         targetSdkVersion 28
-        versionCode 1
-        versionName "1.0"
+        versionCode 2
+        versionName "1.1"
         testInstrumentationRunner "androidx.testListener.runner.AndroidJUnitRunner"
     }
     buildTypes {
