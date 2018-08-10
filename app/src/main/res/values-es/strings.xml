@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Fixed Gear Calculator</string>
+    <string name="pick_chainring">Plato</string>
+    <string name="pick_cog">Piñón</string>
+    <string name="meters">Metros</string>
+    <string name="inches">Pulgadas</string>
+    <string name="wheel_size">Tamaño de Rueda</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="calculator">Calculadora</string>
+    <string name="favorites">Favoritos</string>
+    <string name="favorite_gear">Avance Favorito</string>
+
+</resources>

@@ -1,19 +1,10 @@
 <resources>
     <string name="app_name">Fixed Gear Calculator</string>
-    <string name="chainring">Chainring</string>
-    <string name="cog">Cog</string>
     <string name="pick_chainring">Chainring</string>
     <string name="pick_cog">Cog</string>
     <string name="meters">Meters</string>
     <string name="inches">Inches</string>
     <string name="wheel_size">Wheel size</string>
-    <string name="title_activity_bottom">BottomActivity</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="calculator">Calculator</string>
     <string name="favorites">Favorites</string>
     <string name="favorite_gear">Favorite Gear</string>
