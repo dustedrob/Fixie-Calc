@@ -9,7 +9,7 @@ import kotlinx.android.synthetic.main.marker_layout.view.*
 import me.roberto.fixiecalc.SystemType
 
 
-class CustomMarkerView(context: Context?, layoutResource: Int,val speedSystem: SystemType) : MarkerView(context, layoutResource) {
+class CustomMarkerView(context: Context?, layoutResource: Int, private val speedSystem: SystemType) : MarkerView(context, layoutResource) {
 
 
     // runs every time the MarkerView is redrawn, can be used to update the

@@ -1,17 +1,14 @@
-package me.roberto.kitso.database
+package me.roberto.fixiecalc.di
 
-import android.content.SharedPreferences
 import dagger.Module
 import dagger.Provides
-import me.roberto.fixiecalc.di.ApplicationClass
-import me.roberto.fixiecalc.di.ViewModelFactory
-import me.roberto.fixiecalc.ui.BottomActivity
+import me.roberto.fixiecalc.database.GearDatabase
 import javax.inject.Singleton
 
 @Module
 class  AppModule (private val application: ApplicationClass) {
 
-    val PREFS="me.roberto.track.prefs"
+    private val PREFS="me.roberto.track.prefs"
 
     @Singleton
     @Provides

@@ -8,7 +8,7 @@ import kotlin.math.roundToInt
 object Calculations {
 
 
-    val milesFactor = 1.609344
+    private val milesFactor = 1.609344
     var wheelSizes = intArrayOf(2070, 2080, 2086, 2096, 2105, 2136, 2146, 2155, 2168)
 
 

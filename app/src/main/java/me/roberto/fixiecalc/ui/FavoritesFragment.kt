@@ -6,8 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -18,22 +16,16 @@ import me.roberto.fixiecalc.Rollout
 import me.roberto.fixiecalc.calculations.Calculations
 import me.roberto.fixiecalc.di.ApplicationClass
 import me.roberto.fixiecalc.di.ViewModelFactory
-import me.roberto.kitso.ui.GearViewModel
 import javax.inject.Inject
 
 
-/**
- * A fragment representing a list of Items.
- * Activities containing this fragment MUST implement the
- * [FavoritesFragment.OnFragmentInteractionListener] interface.
- */
 class FavoritesFragment : Fragment() {
 
     @Inject
     lateinit var viewModelFactory:ViewModelFactory
     @Inject
     lateinit var prefs: SharedPreferences
-    private lateinit var viewModel:GearViewModel
+    private lateinit var viewModel: GearViewModel
     private lateinit var rollout: Rollout
 
 
@@ -59,18 +51,16 @@ class FavoritesFragment : Fragment() {
             empty_list.visibility = View.GONE
             recycler_list.visibility = View.VISIBLE
 
-            val sortedlist = list.sortedWith(Comparator<Gear> { p0, p1 ->
+            val sortedlist = list.sortedWith(Comparator { p0, p1 ->
                 val gear0 = Calculations.calculateGear(p0!!.wheelSize, p0.chainRing, p0.cog, rollout)
 
                 val gear1 = Calculations.calculateGear(p1!!.wheelSize, p1.chainRing, p1.cog, rollout)
 
 
-                if (gear0 < gear1) {
-                    -1
-                } else if (gear0 == gear1) {
-                    0
-                } else {
-                    1
+                when {
+                    gear0 < gear1 -> -1
+                    gear0 == gear1 -> 0
+                    else -> 1
                 }
             })
             gearAdapter.gears.clear()

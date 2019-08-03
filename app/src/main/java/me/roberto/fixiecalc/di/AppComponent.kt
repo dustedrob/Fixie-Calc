@@ -5,7 +5,6 @@ import me.roberto.fixiecalc.ui.FavoritesFragment
 import me.roberto.fixiecalc.ui.GearRecyclerViewAdapter
 import me.roberto.fixiecalc.ui.PickerFragment
 import me.roberto.fixiecalc.ui.SpeedCadenceFragment
-import me.roberto.kitso.database.AppModule
 import javax.inject.Singleton
 
 @Singleton

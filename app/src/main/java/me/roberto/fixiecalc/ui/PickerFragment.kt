@@ -15,7 +15,6 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.CompoundButton
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import kotlinx.android.synthetic.main.fragment_picker.*
@@ -28,7 +27,6 @@ import me.roberto.fixiecalc.calculations.Calculations.wheelSizes
 import me.roberto.fixiecalc.di.ApplicationClass
 import me.roberto.fixiecalc.di.ViewModelFactory
 import me.roberto.fixiecalc.ui.BottomActivity.Companion.PREFS_ROLLOUT
-import me.roberto.kitso.ui.GearViewModel
 import java.util.*
 import javax.inject.Inject
 
@@ -42,14 +40,14 @@ class PickerFragment : Fragment(), AdapterView.OnItemSelectedListener {
     lateinit var viewModelFactory: ViewModelFactory
     @Inject
     lateinit var prefs:SharedPreferences
-    private lateinit var viewModel:GearViewModel
-    val TAG = "gear_picker"
+    private lateinit var viewModel: GearViewModel
+    private val TAG = "gear_picker"
     var cog = 11
     var chainRing = 44
     var wheelSize = 0
 
-    val favoriteGears: HashSet<Gear> = HashSet()
-    lateinit var gearListener: OnEditableSeekBarChangeListener
+    private val favoriteGears: HashSet<Gear> = HashSet()
+    private lateinit var gearListener: OnEditableSeekBarChangeListener
 
 
     init {
@@ -108,7 +106,7 @@ class PickerFragment : Fragment(), AdapterView.OnItemSelectedListener {
         wheel_spinner.adapter = wheelAdapter
         wheel_spinner.onItemSelectedListener = this
 
-        when (prefs?.getInt(PREFS_ROLLOUT, Rollout.METERS.ordinal)) {
+        when (prefs.getInt(PREFS_ROLLOUT, Rollout.METERS.ordinal)) {
             Rollout.METERS.ordinal -> radioGroup.check(R.id.metersRadio)
             Rollout.INCHES.ordinal -> radioGroup.check(R.id.inchesRadio)
         }
@@ -144,7 +142,7 @@ class PickerFragment : Fragment(), AdapterView.OnItemSelectedListener {
     }
 
 
-    fun getGear(): Gear {
+    private fun getGear(): Gear {
         //We'll use the color for the cadence chart
         val rnd = Random()
         val color = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256))
@@ -165,7 +163,7 @@ class PickerFragment : Fragment(), AdapterView.OnItemSelectedListener {
             roll = Rollout.INCHES
 
         }
-        prefs?.edit()?.putInt(PREFS_ROLLOUT, roll.ordinal)?.commit()
+        prefs.edit()?.putInt(PREFS_ROLLOUT, roll.ordinal)?.commit()
 
         rollout.startAnimation(getAnimation())
         unitText.startAnimation(getAnimation())
@@ -180,7 +178,7 @@ class PickerFragment : Fragment(), AdapterView.OnItemSelectedListener {
     }
 
 
-    fun getAnimation(): ScaleAnimation {
+    private fun getAnimation(): ScaleAnimation {
         val scaleAnimation = ScaleAnimation(0.7f, 1.0f, 0.7f, 1.0f, Animation.RELATIVE_TO_SELF, 0.7f, Animation.RELATIVE_TO_SELF, 0.7f)
         scaleAnimation.duration = 500
         val bounceInterpolator = BounceInterpolator()

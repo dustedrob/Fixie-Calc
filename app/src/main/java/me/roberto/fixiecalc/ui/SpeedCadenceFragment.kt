@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.view.*
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.github.mikephil.charting.components.Description
@@ -25,7 +24,6 @@ import me.roberto.fixiecalc.calculations.Calculations
 import me.roberto.fixiecalc.di.ApplicationClass
 import me.roberto.fixiecalc.di.ViewModelFactory
 import me.roberto.fixiecalc.ui.BottomActivity.Companion.PREFS_SYSTEM
-import me.roberto.kitso.ui.GearViewModel
 import java.util.*
 import javax.inject.Inject
 
@@ -55,7 +53,7 @@ class SpeedCadenceFragment : Fragment(), RangeSeekBar.SeekBarChangeListener {
     lateinit var viewModelFactory: ViewModelFactory
     @Inject
     lateinit var prefs: SharedPreferences
-    private lateinit var viewModel:GearViewModel
+    private lateinit var viewModel: GearViewModel
     private lateinit var rollout: Rollout
     private lateinit var systemType: SystemType
     private var gearList: List<Gear> = emptyList()
@@ -66,7 +64,7 @@ class SpeedCadenceFragment : Fragment(), RangeSeekBar.SeekBarChangeListener {
     }
 
 
-    fun setupChart(dataList: List<Gear>, minThumbValue: Int, maxThumbValue: Int)
+    private fun setupChart(dataList: List<Gear>, minThumbValue: Int, maxThumbValue: Int)
     {
         if (dataList.isEmpty())
         {
@@ -140,7 +138,7 @@ class SpeedCadenceFragment : Fragment(), RangeSeekBar.SeekBarChangeListener {
             else -> SystemType.IMPERIAL
         }
 
-        prefs?.edit()?.putInt(PREFS_SYSTEM, systemType.ordinal)?.commit()
+        prefs.edit()?.putInt(PREFS_SYSTEM, systemType.ordinal)?.commit()
 
         setRanges(systemType)
         item.isChecked = true
@@ -150,7 +148,7 @@ class SpeedCadenceFragment : Fragment(), RangeSeekBar.SeekBarChangeListener {
     }
 
 
-    fun setSystemLabel(systemType:SystemType)
+    private fun setSystemLabel(systemType:SystemType)
     {
 
         start_speed_text.text=systemType.label
@@ -173,7 +171,7 @@ class SpeedCadenceFragment : Fragment(), RangeSeekBar.SeekBarChangeListener {
             viewModel = ViewModelProviders.of(it,viewModelFactory).get(GearViewModel::class.java)
         }
         viewModel.gears.observe(this,observer)
-        systemType= SystemType.values()[prefs!!.getInt(PREFS_SYSTEM,0)]
+        systemType= SystemType.values()[prefs.getInt(PREFS_SYSTEM,0)]
 
 
     }
@@ -214,7 +212,7 @@ class SpeedCadenceFragment : Fragment(), RangeSeekBar.SeekBarChangeListener {
 
 
 
-    fun setDataSetVisual(dataSet: LineDataSet, color: Int) {
+    private fun setDataSetVisual(dataSet: LineDataSet, color: Int) {
         dataSet.fillColor = ContextCompat.getColor(activity!!, R.color.colorPrimary)
 
         dataSet.color = color

@@ -15,5 +15,6 @@
     <string name="you_don_t_have_any_favorites_yet">You don\'t have any favorites yet</string>
     <string name="metric">Metric (km/h)</string>
     <string name="imperial">Imperial (mi/h)</string>
+    <string name="speed">Speed</string>
 
 </resources>

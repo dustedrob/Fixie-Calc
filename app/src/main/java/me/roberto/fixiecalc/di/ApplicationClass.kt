@@ -1,7 +1,6 @@
 package me.roberto.fixiecalc.di
 
 import android.app.Application
-import me.roberto.kitso.database.AppModule
 
 class ApplicationClass: Application(){
 

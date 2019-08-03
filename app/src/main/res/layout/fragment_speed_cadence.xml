@@ -86,7 +86,7 @@
             android:layout_margin="8dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Speed"
+            android:text="@string/speed"
             android:textAppearance="@style/TextAppearance.AppCompat.Headline"
             android:layout_gravity="center"/>
         <LinearLayout

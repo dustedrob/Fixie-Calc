@@ -16,11 +16,6 @@ import me.roberto.fixiecalc.di.ApplicationClass
 import me.roberto.fixiecalc.ui.BottomActivity.Companion.PREFS_ROLLOUT
 import javax.inject.Inject
 
-/**
- * [RecyclerView.Adapter] that can display a [DummyItem] and makes a call to the
- * specified [OnListFragmentInteractionListener].
- * TODO: Replace the implementation with code for your data type.
- */
 class GearRecyclerViewAdapter
     : RecyclerView.Adapter<GearRecyclerViewAdapter.ViewHolder>() {
 
@@ -32,7 +27,7 @@ class GearRecyclerViewAdapter
     @Inject
     lateinit var prefs:SharedPreferences
     lateinit var context: Context
-    lateinit var rollout: Rollout
+    private lateinit var rollout: Rollout
 
     override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
         super.onAttachedToRecyclerView(recyclerView)
@@ -54,7 +49,7 @@ class GearRecyclerViewAdapter
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = gears[position]
-        var unit:String
+        val unit:String
 
         when (rollout)
         {
