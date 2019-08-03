@@ -37,8 +37,7 @@
 
         android:textSize="24sp"
         app:layout_constraintStart_toEndOf="@+id/cross"
-        tools:text="15
-" />
+        tools:text="15" />
 
     <TextView
 

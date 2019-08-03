@@ -1,8 +1,10 @@
-package me.roberto.kitso.ui
+package me.roberto.fixiecalc.di
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import me.roberto.kitso.database.GearDao
+import me.roberto.kitso.ui.GearViewModel
+
 
 class ViewModelFactory(private val dataSource: GearDao) : ViewModelProvider.Factory {
 

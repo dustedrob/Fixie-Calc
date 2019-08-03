@@ -24,7 +24,7 @@ interface GearDao {
 
 
     @Query("SELECT * FROM gear")
-    fun load():Maybe<List<Gear>>
+    fun loadGears():Maybe<List<Gear>>
 
 
 

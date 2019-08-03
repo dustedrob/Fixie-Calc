@@ -10,5 +10,11 @@
     <string name="calculator">Calculadora</string>
     <string name="favorites">Favoritos</string>
     <string name="favorite_gear">Avance Favorito</string>
+    <string name="select_gears">Select Gears:</string>
+    <string name="select_speed_range">Seleccionar Rango de Velocidad en:</string>
+    <string name="cadence">Cadencia</string>
+    <string name="you_don_t_have_any_favorites_yet">You don\'t have any favorites yet</string>
+    <string name="metric">Metrico (km/h)</string>
+    <string name="imperial">Imperial (mi/h)</string>
 
 </resources>

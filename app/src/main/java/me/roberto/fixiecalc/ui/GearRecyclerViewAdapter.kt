@@ -12,9 +12,9 @@ import android.widget.TextView
 
 import kotlinx.android.synthetic.main.fragment_gear.view.*
 import me.roberto.fixiecalc.calculations.Calculations
-import me.roberto.fixiecalc.Measure
+import me.roberto.fixiecalc.Rollout
 import me.roberto.fixiecalc.R
-import me.roberto.fixiecalc.ui.BottomActivity.Companion.PREFS_SYSTEM
+import me.roberto.fixiecalc.ui.BottomActivity.Companion.PREFS_ROLLOUT
 
 /**
  * [RecyclerView.Adapter] that can display a [DummyItem] and makes a call to the
@@ -28,17 +28,17 @@ class GearRecyclerViewAdapter
 
     lateinit var context: Context
     lateinit var prefs:SharedPreferences
-    lateinit var measure: Measure
+    lateinit var rollout: Rollout
 
     override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
         super.onAttachedToRecyclerView(recyclerView)
         context=recyclerView.context
         prefs=context.getSharedPreferences(BottomActivity.PREFS,0)
 
-        when (prefs?.getInt(PREFS_SYSTEM, Measure.METERS.ordinal))
+        when (prefs?.getInt(PREFS_ROLLOUT, Rollout.METERS.ordinal))
         {
-            Measure.METERS.ordinal->measure=Measure.METERS
-            Measure.INCHES.ordinal->measure=Measure.INCHES
+            Rollout.METERS.ordinal->rollout=Rollout.METERS
+            Rollout.INCHES.ordinal->rollout=Rollout.INCHES
         }
 
     }
@@ -53,10 +53,10 @@ class GearRecyclerViewAdapter
         val item = gears[position]
         var unit:String
 
-        when (measure)
+        when (rollout)
         {
-            Measure.METERS->unit="m"
-            Measure.INCHES->unit="in"
+            Rollout.METERS->unit="m"
+            Rollout.INCHES->unit="in"
         }
 
 
@@ -71,7 +71,7 @@ class GearRecyclerViewAdapter
             holder.wheelSize.text= context.resources.getStringArray(R.array.wheel_values)[i].toString()
         }
 
-        holder.rollout.text = "%.2f".format(Calculations.calculateGear(item.wheelSize, item.chainRing, item.cog,measure  ))+" "+unit
+        holder.rollout.text = "%.2f".format(Calculations.calculateGear(item.wheelSize, item.chainRing, item.cog,rollout  ))+" "+unit
 
 
     }

@@ -6,16 +6,12 @@ import androidx.room.PrimaryKey
 
 @Keep
 @Entity
-class Gear(chainRing:Int, cog:Int, wheelSize:Int ) {
+class Gear(var chainRing: Int, var cog: Int, var wheelSize: Int, var color: Int) {
+
 
 
     @PrimaryKey
     var id="$chainRing$cog$wheelSize"
-
-    var chainRing=chainRing
-    var cog=cog
-    var wheelSize=wheelSize
-
 
 
     override fun equals(other: Any?): Boolean {
@@ -27,6 +23,11 @@ class Gear(chainRing:Int, cog:Int, wheelSize:Int ) {
         if (id != other.id) return false
 
         return true
+    }
+
+
+    override fun toString(): String {
+        return "$chainRing x $cog"
     }
 
     override fun hashCode(): Int {
