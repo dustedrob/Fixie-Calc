@@ -1,5 +1,6 @@
 package me.roberto.fixiecalc.ui
 
+import android.content.SharedPreferences
 import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Bundle
@@ -26,7 +27,6 @@ import me.roberto.fixiecalc.calculations.Calculations
 import me.roberto.fixiecalc.calculations.Calculations.wheelSizes
 import me.roberto.fixiecalc.di.ApplicationClass
 import me.roberto.fixiecalc.di.ViewModelFactory
-import me.roberto.fixiecalc.ui.BottomActivity.Companion.PREFS
 import me.roberto.fixiecalc.ui.BottomActivity.Companion.PREFS_ROLLOUT
 import me.roberto.kitso.ui.GearViewModel
 import java.util.*
@@ -40,6 +40,8 @@ class PickerFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
+    @Inject
+    lateinit var prefs:SharedPreferences
     private lateinit var viewModel:GearViewModel
     val TAG = "gear_picker"
     var cog = 11
@@ -83,7 +85,7 @@ class PickerFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
     }
 
-    fun changeFavoriteState(button: CompoundButton, checked: Boolean) {
+    private fun changeFavoriteState(button: CompoundButton, checked: Boolean) {
 
         if (checked) {
 
@@ -102,7 +104,6 @@ class PickerFragment : Fragment(), AdapterView.OnItemSelectedListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         button_favorite.setOnCheckedChangeListener(checkedChangeListener)
-        val prefs = activity?.getSharedPreferences(PREFS, 0)
         val wheelAdapter = ArrayAdapter.createFromResource(context!!, R.array.wheel_values, android.R.layout.simple_spinner_dropdown_item)
         wheel_spinner.adapter = wheelAdapter
         wheel_spinner.onItemSelectedListener = this
@@ -154,7 +155,6 @@ class PickerFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
     fun updateUI(selectedWheelSize: Int, selectedRing: Int, selectedCog: Int) {
 
-        val prefs = context?.getSharedPreferences(PREFS, 0)
         var roll: Rollout? = null
 
         if (radioGroup.checkedRadioButtonId == metersRadio.id) {

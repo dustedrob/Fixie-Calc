@@ -1,6 +1,7 @@
 package me.roberto.fixiecalc.ui
 
 
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.*
 import androidx.core.content.ContextCompat
@@ -52,6 +53,8 @@ class SpeedCadenceFragment : Fragment(), RangeSeekBar.SeekBarChangeListener {
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
+    @Inject
+    lateinit var prefs: SharedPreferences
     private lateinit var viewModel:GearViewModel
     private lateinit var rollout: Rollout
     private lateinit var systemType: SystemType
@@ -137,7 +140,6 @@ class SpeedCadenceFragment : Fragment(), RangeSeekBar.SeekBarChangeListener {
             else -> SystemType.IMPERIAL
         }
 
-        val prefs=context?.getSharedPreferences(BottomActivity.PREFS,0)
         prefs?.edit()?.putInt(PREFS_SYSTEM, systemType.ordinal)?.commit()
 
         setRanges(systemType)
@@ -167,7 +169,6 @@ class SpeedCadenceFragment : Fragment(), RangeSeekBar.SeekBarChangeListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         ApplicationClass.appComponent.inject(this)
-        val prefs=context?.getSharedPreferences(BottomActivity.PREFS,0)
         activity?.let {
             viewModel = ViewModelProviders.of(it,viewModelFactory).get(GearViewModel::class.java)
         }

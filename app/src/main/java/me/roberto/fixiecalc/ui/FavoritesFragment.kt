@@ -1,5 +1,6 @@
 package me.roberto.fixiecalc.ui
 
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -30,6 +31,8 @@ class FavoritesFragment : Fragment() {
 
     @Inject
     lateinit var viewModelFactory:ViewModelFactory
+    @Inject
+    lateinit var prefs: SharedPreferences
     private lateinit var viewModel:GearViewModel
     private lateinit var rollout: Rollout
 
@@ -41,7 +44,7 @@ class FavoritesFragment : Fragment() {
             viewModel = ViewModelProviders.of(it,viewModelFactory).get(GearViewModel::class.java)
         }
         viewModel.gears.observe(this, observer)
-        rollout = Rollout.values().get(activity!!.getSharedPreferences(BottomActivity.PREFS, 0).getInt(BottomActivity.PREFS_ROLLOUT, 0))
+        rollout = Rollout.values()[prefs.getInt(BottomActivity.PREFS_ROLLOUT, 0)]
     }
 
 

@@ -1,20 +1,20 @@
 package me.roberto.fixiecalc.ui
 
+
 import android.content.Context
 import android.content.SharedPreferences
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-
-
-
+import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.fragment_gear.view.*
-import me.roberto.fixiecalc.calculations.Calculations
-import me.roberto.fixiecalc.Rollout
 import me.roberto.fixiecalc.R
+import me.roberto.fixiecalc.Rollout
+import me.roberto.fixiecalc.calculations.Calculations
+import me.roberto.fixiecalc.di.ApplicationClass
 import me.roberto.fixiecalc.ui.BottomActivity.Companion.PREFS_ROLLOUT
+import javax.inject.Inject
 
 /**
  * [RecyclerView.Adapter] that can display a [DummyItem] and makes a call to the
@@ -24,18 +24,21 @@ import me.roberto.fixiecalc.ui.BottomActivity.Companion.PREFS_ROLLOUT
 class GearRecyclerViewAdapter
     : RecyclerView.Adapter<GearRecyclerViewAdapter.ViewHolder>() {
 
+    init {
+        ApplicationClass.appComponent.inject(this)
+    }
     val gears=ArrayList<Gear>()
 
-    lateinit var context: Context
+    @Inject
     lateinit var prefs:SharedPreferences
+    lateinit var context: Context
     lateinit var rollout: Rollout
 
     override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
         super.onAttachedToRecyclerView(recyclerView)
         context=recyclerView.context
-        prefs=context.getSharedPreferences(BottomActivity.PREFS,0)
 
-        when (prefs?.getInt(PREFS_ROLLOUT, Rollout.METERS.ordinal))
+        when (prefs.getInt(PREFS_ROLLOUT, Rollout.METERS.ordinal))
         {
             Rollout.METERS.ordinal->rollout=Rollout.METERS
             Rollout.INCHES.ordinal->rollout=Rollout.INCHES
