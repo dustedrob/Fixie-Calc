@@ -13,7 +13,6 @@ import me.roberto.fixiecalc.R
 import me.roberto.fixiecalc.Rollout
 import me.roberto.fixiecalc.calculations.Calculations
 import me.roberto.fixiecalc.di.ApplicationClass
-import me.roberto.fixiecalc.ui.BottomActivity.Companion.PREFS_ROLLOUT
 import javax.inject.Inject
 
 class GearRecyclerViewAdapter
@@ -27,18 +26,10 @@ class GearRecyclerViewAdapter
     @Inject
     lateinit var prefs:SharedPreferences
     lateinit var context: Context
-    private lateinit var rollout: Rollout
 
     override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
         super.onAttachedToRecyclerView(recyclerView)
         context=recyclerView.context
-
-        when (prefs.getInt(PREFS_ROLLOUT, Rollout.METERS.ordinal))
-        {
-            Rollout.METERS.ordinal->rollout=Rollout.METERS
-            Rollout.INCHES.ordinal->rollout=Rollout.INCHES
-        }
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -49,18 +40,7 @@ class GearRecyclerViewAdapter
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = gears[position]
-        val unit:String
-
-        when (rollout)
-        {
-            Rollout.METERS->unit="m"
-            Rollout.INCHES->unit="in"
-        }
-
-
-
-        holder.chainRing.text = item.chainRing.toString()
-        holder.cog.text = item.cog.toString()
+        holder.gearValue.text = item.toString()
 
 
         for (i in Calculations.wheelSizes.indices)
@@ -69,9 +49,8 @@ class GearRecyclerViewAdapter
             holder.wheelSize.text= context.resources.getStringArray(R.array.wheel_values)[i].toString()
         }
 
-        holder.rollout.text = "%.2f".format(Calculations.calculateGear(item.wheelSize, item.chainRing, item.cog,rollout  ))+" "+unit
-
-
+        holder.rolloutMeters.text = "%.2f".format(Calculations.calculateGear(item.wheelSize, item.chainRing, item.cog,Rollout.METERS  ))+" m"
+        holder.rolloutInches.text = "%.2f".format(Calculations.calculateGear(item.wheelSize, item.chainRing, item.cog,Rollout.INCHES  ))+" in"
     }
 
 
@@ -81,18 +60,17 @@ class GearRecyclerViewAdapter
         gears.clear()
         gears.addAll(list)
         notifyDataSetChanged()
-
     }
     override fun getItemCount(): Int = gears.size
 
     inner class ViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
-        val chainRing: TextView = view.gear_chainring
-        val cog: TextView = view.gear_cog
+        val gearValue: TextView = view.gear_value
         val wheelSize:TextView=view.gear_wheel
-        val rollout:TextView=view.gear_rollout
+        val rolloutMeters:TextView=view.gear_rollout_meters
+        val rolloutInches:TextView=view.gear_rollout_inches
 
         override fun toString(): String {
-            return super.toString() + " '" + cog.text + "'"
+            return super.toString() + " '" + gearValue.text + "'"
         }
     }
 }

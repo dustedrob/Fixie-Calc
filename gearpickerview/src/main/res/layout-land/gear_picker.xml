@@ -78,29 +78,6 @@
                 app:layout_constraintTop_toBottomOf="@+id/cog_bar" />
 
 
-            <RadioGroup
-                android:id="@+id/radioGroup"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginEnd="8dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@id/wheel_spinner"
-                app:layout_constraintTop_toBottomOf="@+id/cog_bar">
-
-                <RadioButton
-                    android:id="@+id/metersRadio"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/meters" />
-
-                <RadioButton
-                    android:id="@+id/inchesRadio"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/inches" />
-            </RadioGroup>
-
             <ToggleButton
                 android:id="@+id/button_favorite"
                 android:layout_width="24dp"
@@ -112,7 +89,7 @@
                 android:textOff=""
                 android:textOn=""
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@id/radioGroup"
+                app:layout_constraintStart_toEndOf="@id/wheel_spinner"
                 app:layout_constraintTop_toBottomOf="@+id/cog_bar" />
 
             <TextView

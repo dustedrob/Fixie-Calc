@@ -7,37 +7,16 @@
     android:layout_height="wrap_content">
 
     <TextView
-        android:textAppearance="?attr/textAppearanceListItem"
-        android:id="@+id/gear_chainring"
+        android:id="@+id/gear_value"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
+        android:textAppearance="?attr/textAppearanceListItem"
 
         android:textSize="24sp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/cross"
         app:layout_constraintStart_toStartOf="parent"
-        tools:text="56" />
+        tools:text="56x15" />
 
-
-    <TextView
-        android:textAppearance="?attr/textAppearanceListItem"
-        android:id="@+id/cross"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="x"
-        android:textSize="24sp"
-        app:layout_constraintStart_toEndOf="@+id/gear_chainring"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:textAppearance="?attr/textAppearanceListItem"
-        android:id="@+id/gear_cog"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        android:textSize="24sp"
-        app:layout_constraintStart_toEndOf="@+id/cross"
-        tools:text="15" />
 
     <TextView
 
@@ -50,19 +29,32 @@
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cross"
+        app:layout_constraintTop_toBottomOf="@id/gear_value"
         tools:text="700x23c" />
 
     <TextView
-
-        android:textAppearance="?attr/textAppearanceListItem"
-        android:id="@+id/gear_rollout"
+        android:id="@+id/gear_rollout_meters"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
+        android:textAlignment="textEnd"
+        android:textAppearance="?attr/textAppearanceListItem"
         android:textSize="30sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/gear_rollout_inches"
+        app:layout_constraintStart_toEndOf="@+id/gear_wheel"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="8.98m" />
+
+    <TextView
+        android:id="@+id/gear_rollout_inches"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:textAppearance="?attr/textAppearanceListItem"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="8.98m" />

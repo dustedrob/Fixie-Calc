@@ -16,5 +16,7 @@
     <string name="metric">Metric (km/h)</string>
     <string name="imperial">Imperial (mi/h)</string>
     <string name="speed">Speed</string>
+    <string name="m_line">m</string>
+    <string name="in_line">in</string>
 
 </resources>

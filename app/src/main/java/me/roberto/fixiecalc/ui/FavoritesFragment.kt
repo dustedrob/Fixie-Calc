@@ -26,8 +26,6 @@ class FavoritesFragment : Fragment() {
     @Inject
     lateinit var prefs: SharedPreferences
     private lateinit var viewModel: GearViewModel
-    private lateinit var rollout: Rollout
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,7 +34,6 @@ class FavoritesFragment : Fragment() {
             viewModel = ViewModelProviders.of(it,viewModelFactory).get(GearViewModel::class.java)
         }
         viewModel.gears.observe(this, observer)
-        rollout = Rollout.values()[prefs.getInt(BottomActivity.PREFS_ROLLOUT, 0)]
     }
 
 
@@ -47,16 +44,12 @@ class FavoritesFragment : Fragment() {
             recycler_list.visibility = View.GONE
             empty_list.visibility = View.VISIBLE
         } else {
-
             empty_list.visibility = View.GONE
             recycler_list.visibility = View.VISIBLE
 
             val sortedlist = list.sortedWith(Comparator { p0, p1 ->
-                val gear0 = Calculations.calculateGear(p0!!.wheelSize, p0.chainRing, p0.cog, rollout)
-
-                val gear1 = Calculations.calculateGear(p1!!.wheelSize, p1.chainRing, p1.cog, rollout)
-
-
+                val gear0 = Calculations.calculateGear(p0!!.wheelSize, p0.chainRing, p0.cog, Rollout.METERS)
+                val gear1 = Calculations.calculateGear(p1!!.wheelSize, p1.chainRing, p1.cog, Rollout.METERS)
                 when {
                     gear0 < gear1 -> -1
                     gear0 == gear1 -> 0
@@ -64,8 +57,6 @@ class FavoritesFragment : Fragment() {
                 }
             })
             gearAdapter.gears.clear()
-
-
             gearAdapter.addAll(sortedlist)
         }
 
@@ -77,12 +68,7 @@ class FavoritesFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_gear_list, container, false)
-
-
         gearAdapter = GearRecyclerViewAdapter()
-        // Set the gearAdapter
-
-
         return view
     }
 

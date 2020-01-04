@@ -14,8 +14,7 @@ class BottomActivity : AppCompatActivity(), OnFragmentInteractionListener {
 
 
     companion object {
-        val  PREFS_ROLLOUT="me.roberto.tracks.prefs.rollout"
-        val  PREFS_SYSTEM="me.roberto.tracks.prefs.system"
+        const val  PREFS_SYSTEM="me.roberto.tracks.prefs.system"
 
     }
 
