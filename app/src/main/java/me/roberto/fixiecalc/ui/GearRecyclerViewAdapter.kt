@@ -10,8 +10,8 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.fragment_gear.view.*
 import me.roberto.fixiecalc.R
-import me.roberto.fixiecalc.Rollout
-import me.roberto.fixiecalc.calculations.Calculations
+import me.roberto.gear.domain.Rollout
+import me.roberto.gear.domain.calculations.Calculations
 import me.roberto.fixiecalc.di.ApplicationClass
 import javax.inject.Inject
 
@@ -21,7 +21,7 @@ class GearRecyclerViewAdapter
     init {
         ApplicationClass.appComponent.inject(this)
     }
-    val gears=ArrayList<Gear>()
+    val gears=ArrayList<me.roberto.gear.domain.Gear>()
 
     @Inject
     lateinit var prefs:SharedPreferences
@@ -49,13 +49,13 @@ class GearRecyclerViewAdapter
             holder.wheelSize.text= context.resources.getStringArray(R.array.wheel_values)[i].toString()
         }
 
-        holder.rolloutMeters.text = "%.2f".format(Calculations.calculateGear(item.wheelSize, item.chainRing, item.cog,Rollout.METERS  ))+" m"
-        holder.rolloutInches.text = "%.2f".format(Calculations.calculateGear(item.wheelSize, item.chainRing, item.cog,Rollout.INCHES  ))+" in"
+        holder.rolloutMeters.text = "%.2f".format(Calculations.calculateGear(item.wheelSize, item.chainRing, item.cog, Rollout.METERS  ))+" m"
+        holder.rolloutInches.text = "%.2f".format(Calculations.calculateGear(item.wheelSize, item.chainRing, item.cog, Rollout.INCHES  ))+" in"
     }
 
 
 
-    fun addAll(list:List<Gear>)
+    fun addAll(list:List<me.roberto.gear.domain.Gear>)
     {
         gears.clear()
         gears.addAll(list)

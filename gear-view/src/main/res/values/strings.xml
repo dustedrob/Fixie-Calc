@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">GearPickerView</string>
+    <string name="pick_chainring">Chainring</string>
+    <string name="pick_cog">Cog</string>
+    <string name="wheel_size">Wheel size</string>
+
+</resources>

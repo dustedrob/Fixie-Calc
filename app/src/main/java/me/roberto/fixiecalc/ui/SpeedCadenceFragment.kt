@@ -10,11 +10,12 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import kotlinx.android.synthetic.main.fragment_speed_cadence.*
 import me.roberto.fixiecalc.R
-import me.roberto.fixiecalc.SystemType
-import me.roberto.fixiecalc.calculations.Calculations
+import me.roberto.gear.domain.SystemType
+import me.roberto.gear.domain.calculations.Calculations
 import me.roberto.fixiecalc.di.ApplicationClass
 import me.roberto.fixiecalc.di.ViewModelFactory
 import me.roberto.fixiecalc.ui.BottomActivity.Companion.PREFS_SYSTEM
+import me.roberto.gear.domain.Gear
 import javax.inject.Inject
 
 

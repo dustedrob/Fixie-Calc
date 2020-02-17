@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Fixed Gear Calculator</string>
+    <string name="pick_chainring">Plato</string>
+    <string name="pick_cog">Piñón</string>
+    <string name="wheel_size">Tamaño de Rueda</string>
+
+</resources>

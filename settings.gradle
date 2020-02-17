@@ -1,1 +1,1 @@
-include ':app', ':gearpickerview'
+include ':app', ':gear-view', ':gear-domain'

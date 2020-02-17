@@ -25,6 +25,15 @@ allprojects {
     }
 }
 
+ext{
+
+    room_version = "2.2.3"
+    nav_version_ktx  = "2.3.0-alpha01"
+    dagger_version = "2.24"
+    lifecycle_version = "2.2.0"
+    ktx_version = "1.2.0"
+}
+
 task clean(type: Delete) {
     delete rootProject.buildDir
 }

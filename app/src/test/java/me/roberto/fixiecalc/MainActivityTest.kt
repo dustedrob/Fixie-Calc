@@ -1,6 +1,7 @@
 package me.roberto.fixiecalc
 
-import me.roberto.fixiecalc.calculations.Calculations
+import me.roberto.gear.domain.Rollout
+import me.roberto.gear.domain.calculations.Calculations
 import org.junit.Test
 
 import org.junit.Assert.*

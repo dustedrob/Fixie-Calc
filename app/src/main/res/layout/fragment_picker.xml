@@ -8,7 +8,9 @@
     android:scrollbars="vertical"
     tools:context="me.roberto.fixiecalc.ui.BottomActivity">
 
-    <include layout="@layout/gear_picker"
+    <me.roberto.gear.view.GearPickerView
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/gearPicker"/>
@@ -30,13 +32,42 @@
             android:layout_height="match_parent">
 
 
+
+
+            <ToggleButton
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:checked="false"
+                android:textOff=""
+                android:textOn=""
+                app:layout_constraintTop_toBottomOf="@id/favorite_text"
+                android:id="@+id/button_favorite"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:background="@drawable/button_favorite"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"/>
+
+            <TextView
+                android:id="@+id/favorite_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="8dp"
+                android:text="Favorite Gear"
+                app:layout_constraintStart_toEndOf="@id/button_favorite"
+                app:layout_constraintTop_toTopOf="@id/button_favorite" />
+
+
             <TextView
                 android:id="@+id/rolloutMeters"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="@style/TextAppearance.AppCompat.Display2"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/favorite_text"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 tools:text="7.25" />
@@ -56,10 +87,9 @@
                 android:id="@+id/rolloutInches"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:textAppearance="@style/TextAppearance.AppCompat.Display2"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintTop_toTopOf="@id/rolloutMeters"
                 app:layout_constraintEnd_toStartOf="@id/inchesText"
                 tools:text="7.25" />
 
