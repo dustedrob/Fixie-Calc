@@ -30,7 +30,7 @@ import me.roberto.gear.view.GearPickerView
 import javax.inject.Inject
 
 
-class PickerFragment : Fragment() {
+class PickerFragment : Fragment(R.layout.fragment_picker) {
 
     private val viewModel by activityViewModels<GearViewModel>{viewModelFactory}
     @Inject
@@ -68,11 +68,6 @@ class PickerFragment : Fragment() {
     private fun setFavoriteFont(favorite: Boolean) {
         val typeface = if (favorite) Typeface.BOLD else Typeface.NORMAL
         favorite_text.setTypeface(null, typeface)
-    }
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_picker, container, false)
     }
 
 
@@ -119,7 +114,6 @@ class PickerFragment : Fragment() {
         scaleAnimation.duration = 500
         val bounceInterpolator = BounceInterpolator()
         scaleAnimation.interpolator = bounceInterpolator
-
         return scaleAnimation
     }
 
